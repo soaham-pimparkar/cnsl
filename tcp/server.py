@@ -51,5 +51,8 @@ with socket.socket( socket.AF_INET , socket.SOCK_STREAM ) as s:
                     conn.send( str( op1 * op2 ).encode() )
                 elif "/" in expr_text:
                     op1 , op2 = map( int , expr_text.split( "/" ) )
-                    conn.send( str( op1 / op2 ).encode() )
+                    if op2 == 0:
+                        conn.send( "division by zero not possible".encode() )
+                    else:
+                        conn.send( str( op1 / op2 ).encode() )
     
